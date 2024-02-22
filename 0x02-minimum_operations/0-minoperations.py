@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""a function to conduct min operations"""
+
 
 def minOperations(n):
     # Helper function to find prime factorization
