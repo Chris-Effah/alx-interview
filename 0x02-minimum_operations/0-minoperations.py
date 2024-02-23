@@ -14,9 +14,7 @@ def minOperations(n):
             operations += 2  # Copy All and Paste
             current_length *= 2
         else:
-            operations += current_length // 2  # Copy All and Paste multiple times
+            operations += current_length // 2
             current_length *= 2
 
     return operations
-   
-    
