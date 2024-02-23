@@ -3,18 +3,26 @@
 
 
 def minOperations(n):
+    """
+    Calculates the fewest number of operations needed to
+    achieve n 'H' characters.
+
+    Parameters:
+        n (int): The desired number of 'H' characters in the file.
+
+    Returns:
+        int: The fewest number of operations needed.
+
+    Raises:
+        None
+    """
     if n <= 1:
-        return 0  # If n is less than or equal to 1, no operations needed
+        return 0
 
-    operations = 0
-    current_length = 1  # Start with a single 'H'
+    operations = n
 
-    while current_length < n:
-        if n % current_length == 0:
-            operations += 2  # Copy All and Paste
-            current_length *= 2
-        else:
-            operations += current_length // 2
-            current_length += current_length // 2
+    for i in range(2, int(n**0.5) + 1):
+        if n % i == 0:
+            operations = min(operations, i + minOperations(n // i))
 
     return operations
