@@ -3,25 +3,20 @@
 
 
 def minOperations(n):
-    # Helper function to find prime factorization
-    def prime_factors(num):
-        factors = []
-        divisor = 2
-        while divisor * divisor <= num:
-            while (num % divisor) == 0:
-                factors.append(divisor)
-                num //= divisor
-            divisor += 1
-        if num > 1:
-            factors.append(num)
-        return factors
+    if n <= 1:
+        return 0  # If n is less than or equal to 1, no operations needed
 
-    factors = prime_factors(n)
     operations = 0
+    current_length = 1  # Start with a single 'H'
 
-    # Iterate through prime factors and sum them up
-    for factor in set(factors):
-        count = factors.count(factor)
-        operations += count
+    while current_length < n:
+        if n % current_length == 0:
+            operations += 2  # Copy All and Paste
+            current_length *= 2
+        else:
+            operations += current_length // 2  # Copy All and Paste multiple times
+            current_length *= 2
 
     return operations
+   
+    
