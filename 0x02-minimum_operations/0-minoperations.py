@@ -15,6 +15,6 @@ def minOperations(n):
             current_length *= 2
         else:
             operations += current_length // 2
-            current_length *= 2
+            current_length += current_length // 2
 
     return operations
