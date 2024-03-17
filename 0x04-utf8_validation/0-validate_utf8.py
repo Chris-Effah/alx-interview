@@ -8,12 +8,10 @@ def validUTF8(data):
     Return: True if data is a valid UTF-8 encoding, else return False
     """
     number_bytes = 0
-
     mask_1 = 1 << 7
     mask_2 = 1 << 6
 
     for i in data:
-
         mask_byte = 1 << 7
 
         if number_bytes == 0:
