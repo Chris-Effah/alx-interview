@@ -1,32 +1,23 @@
-const axios = require('axios');
+#!/usr/bin/node
 
-function getMovieCharacters(movieId) {
-    const url = `https://swapi.dev/api/films/${movieId}/`;
-    return axios.get(url)
-        .then(response => {
-            const charactersUrls = response.data.characters;
-            const characterRequests = charactersUrls.map(url => axios.get(url));
-            return Promise.all(characterRequests);
-        })
-        .then(characterResponses => {
-            return characterResponses.map(response => response.data.name);
-        })
-        .catch(error => {
-            console.error(`Failed to fetch movie data: ${error}`);
-            return [];
-        });
-}
-
-if (process.argv.length !== 3) {
-    console.log("Usage: node script.js <movie_id>");
-    process.exit(1);
-}
+const request = require('request');
 
 const movieId = process.argv[2];
-getMovieCharacters(movieId)
-    .then(characters => {
-        characters.forEach(character => console.log(character));
-    })
-    .catch(error => {
-        console.error(`Error: ${error}`);
+
+const url = `https://swapi-api.hbtn.io/api/films/${movieId}`;
+
+request(url, async (err, res, body) => {
+  err && console.log(err);
+
+  const charactersArray = (JSON.parse(res.body).characters);
+  for (const character of charactersArray) {
+    await new Promise((resolve, reject) => {
+      request(character, (err, res, body) => {
+        err && console.log(err);
+
+        console.log(JSON.parse(body).name);
+        resolve();
+      });
     });
+  }
+});
