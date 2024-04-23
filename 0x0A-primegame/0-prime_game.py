@@ -1,4 +1,3 @@
-
 #!/usr/bin/python3
 """
 Module: Game of choosing Prime numbers
@@ -43,4 +42,3 @@ def isWinner(x, nums):
     elif Ben > Maria:
         return 'Ben'
     return None
-
